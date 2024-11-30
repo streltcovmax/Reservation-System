@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ваш заказ</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+</head>
+<body>
+    <h1 class="main-text">Проверьте информацию о заказе</h1>
+    Игорь сделай тут верстку нормальную
+    <div th:object="${reservationData}" id="orderInfo">
+        <p th:text="*{dateTime}"></p> <br />
+        <p th:text="*{numberOfPeople}"></p> <br />
+        <p th:text="*{fullName}"></p> <br />
+        <p th:text="*{phoneNumber}"></p> <br />
+        <p th:text="*{comment}"></p> <br />
+        <p th:text="*{tableNumber}"></p> <br />
+        <p th:text="*{orderNow}"></p><br />
+        <button>Всё верно!</button>
+        <button onclick="history.back()">Надо кое-что исправить...</button>
+    </div>
+</body>
+</html>
