@@ -2,55 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Бронирование столика</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/index.css}" />
   </head>
   <body>
-        <h1 class="main-text">Форма бронирования</h1>
-        <form th:object="${reservationData}" method="post" id="reservationForm">
-            <label for="dateTime">Дата и время:</label>
-            <input
-            type="datetime-local"
-            id="dateTime"
-            th:field="*{dateTime}"
-            required
-            /><br />
-            <label for="numberOfPeople">Количество человек:</label>
-            <input
-                    type="number"
-                    id="numberOfPeople"
-                    th:field="*{numberOfPeople}"
-                    required
-            /><br />
-            <p id="tablesInfo"></p><br />
-            <label for="fullName">ФИО:</label>
-            <input type="text" id="fullName" th:field="*{fullName}" required /><br />
-            <label for="phoneNumber" class="label-name">Номер телефона:</label>
-            <input
-                    type="tel"
-                    id="phoneNumber"
-                    th:field="*{phoneNumber}"
-                    required
-            /><br />
-            <label for="comment">Комментарий:</label>
-            <textarea id="comment" th:field="*{comment}"></textarea><br />
-            <div class="order-checkbox">
-                <label for="orderNow">Заказать еду сейчас:</label>
-                <input type="checkbox" id="orderNow" th:field="*{orderNow}" /><br />
-            </div>
-            <label for="tableNumber">Номер столика:</label>
-            <input
-                    type="number"
-                    id="tableNumber"
-                    th:field="*{tableNumber}"
-                    required
-            /><br />
+    <form th:object="${reservationData}" method="post" id="reservationForm">
+      <h1 class="main-text">Форма бронирования</h1>
 
-            <button type="submit" id="submitForm">Отправить</button>
+      <label for="fullName">ФИО:</label>
+      <input type="text" id="fullName" th:field="*{fullName}" required /><br />
+
+      <label for="phoneNumber" class="label-name">Номер телефона:</label>
+      <input
+        type="tel"
+        id="phoneNumber"
+        th:field="*{phoneNumber}"
+        required
+      /><br />
+
+      <label for="dateTime">Дата и время:</label>
+      <input
+        type="datetime-local"
+        id="dateTime"
+        th:field="*{dateTime}"
+        required
+      /><br />
+
+      <label for="tableNumber">Номер столика:</label>
+      <input
+        type="number"
+        id="tableNumber"
+        th:field="*{tableNumber}"
+        required
+      /><br />
+
+      <label for="numberOfPeople">Количество человек:</label>
+      <input
+        type="number"
+        id="numberOfPeople"
+        th:field="*{numberOfPeople}"
+        required
+      /><br />
+      <div class="order-checkbox">
+        <label for="orderNow">Заказать еду сейчас:</label>
+        <input type="checkbox" id="orderNow" th:field="*{orderNow}" /><br />
+      </div>
+      <br />
+      <label for="comment">Комментарий:</label>
+      <textarea id="comment" th:field="*{comment}"></textarea><br />
+      <button type="submit" id="submitForm">Отправить</button>
     </form>
 
-<!--    <div th:if="${successMessage}">-->
-<!--      <p th:text="${successMessage}" style="color: green"></p>-->
-<!--    </div>-->
-        <script type="text/javascript" th:src="@{/script.js}"></script>
+    <!--    <div th:if="${successMessage}">-->
+    <!--      <p th:text="${successMessage}" style="color: green"></p>-->
+    <!--    </div>-->
+    <script type="text/javascript" th:src="@{/script.js}"></script>
   </body>
 </html>
