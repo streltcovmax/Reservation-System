@@ -9,7 +9,7 @@
     <div class="result">
       <h1 class="main-text">Проверьте информацию о заказе</h1>
 
-      <div class="table" th:object="${reservationData}" id="orderInfo">
+      <div class="table" th:object="${orderData}" id="orderInfo">
         <p class="result-row" th:text="'ФИО: ' + *{fullName}">ФИО: значение</p>
         <p class="result-row" th:text="'Номер телефона: ' + *{phoneNumber}">
           Номер телефона: значение
@@ -17,9 +17,9 @@
         <p class="result-row" th:text="'Время бронирования: ' + *{dateTime}">
           Дата и время
         </p>
-        <p class="result-row" th:text="'Столик: ' + *{tableNumber}">
-          Столик: значение
-        </p>
+<!--        <p class="result-row" th:text="'Столик: ' + *{tableNumber}">-->
+<!--          Столик: значение-->
+<!--        </p>-->
         <p
           class="result-row"
           th:text="'Количество персон: ' + *{numberOfPeople}"
@@ -36,8 +36,8 @@
         </p>
       </div>
       <div class="choose-operation">
-        <button>Всё верно!</button>
-        <button onclick="history.back()">Надо кое-что исправить...</button>
+        <button onclick="location.href = '/processedOrder'">Всё верно!</button>
+        <button type="button" onclick="location.href = '/reservation'">Надо кое-что исправить...</button>
       </div>
     </div>
   </body>
