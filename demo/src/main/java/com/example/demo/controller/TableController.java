@@ -16,14 +16,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class TableController {
 
     private final TableService tableService;
-
-    @GetMapping("")
-    public String showTableForm(Model model){
+    @GetMapping("/")
+    public String redirectToIndex() {
+        return "index"; // Файл index.html будет использоваться как начальная страница
+    }
+    
+    @GetMapping("/tables")
+        public String showTableForm(Model model) {
         model.addAttribute("orderData", new OrderData());
-        return "tables";
+        return "tables"; // Файл tables.html
     }
 
-    @PostMapping("")
+
+    @PostMapping("/tables")
     public String submitTableForm(HttpSession session, OrderData data){
         int tableNumber = tableService.findTable(data.getDateTime(), data.getNumberOfPeople());
         data.setTableNumber(tableNumber);

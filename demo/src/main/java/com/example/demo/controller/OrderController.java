@@ -26,7 +26,7 @@ public class OrderController {
         OrderData data = (OrderData) session.getAttribute("orderData");
         if(data == null) {
             log.error("order data is null");
-            return "index";
+            return "contact";
         }
 
         data.setId(incrementService.generateCounter(OrderData.COUNTER_NAME));

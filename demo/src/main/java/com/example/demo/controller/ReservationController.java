@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class ReservationController {
 
+  
+
     @GetMapping("/reservation")
     public String showReservationForm(Model model) {
         model.addAttribute("orderData", new OrderData());
-        return "index";
+        return "contact";
     }
 
     @PostMapping("/reservation")

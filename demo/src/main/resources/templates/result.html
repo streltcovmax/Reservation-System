@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Заказ создан</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/order.css}" />
-</head>
-<body>
-<div class="result">
-    <h1 class="main-text">Заказ создан: </h1>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+  </head>
+  <body>
+    <div class="result">
+      <div class="main-text">Заказ создан:</div>
 
-    <div class="table" th:object="${orderData}" id="orderInfo">
-
+      <div class="table" th:object="${orderData}" id="orderInfo">
         <p class="result-row" th:text="'Номер заказа: ' + *{id}">
-            Номер заказа: значение
+          Номер заказа: значение
         </p>
         <p class="result-row" th:text="'Столик: ' + *{tableNumber}">
-            Столик: значение
+          Столик: значение
         </p>
-
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>
