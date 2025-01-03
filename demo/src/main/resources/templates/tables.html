@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Бронирование столика</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+  </head>
+  <body>
+    <div class="blurred-background"></div>
+    <form th:object="${orderData}" method="post" id="tableForm">
+      <div class="main-text">Выберите дату бронирования</div>
+
+      <label for="dateTime">Дата и время:</label>
+      <input type="datetime-local" id="dateTime" th:field="*{dateTime}" /><br />
+      <div class="dateError"></div>
+      <br />
+      <label for="numberOfPeople">Количество человек:</label>
+      <input type="number" id="numberOfPeople" th:field="*{numberOfPeople}" />
+      <div class="numberError"></div>
+      <div class="btn-container">
+        <button
+          class="button-action"
+          type="button"
+          onclick="location.href = '/';"
+        >
+          Вернуться на главную
+        </button>
+
+        <button
+          class="button-action"
+          type="submit"
+          id="submitForm"
+          name="submitForm"
+        >
+          Далее
+        </button>
+      </div>
+    </form>
+    <script>
+      const button = document.getElementById("submitForm");
+      const timeInput = document.getElementById("dateTime");
+      const numberInput = document.getElementById("numberOfPeople");
+
+      button.addEventListener("click", (e) => {
+        const currentDate = new Date();
+
+        // Сброс стилей и удаление старого сообщения об ошибке
+        timeInput.style.border = "";
+        const dateErrorMessage = document.querySelector(".dateError");
+        if (dateErrorMessage) {
+          dateErrorMessage.textContent = ""; // Очистить текст ошибки
+        }
+
+        const numberErrorMessage = document.querySelector(".numberError");
+        if (numberErrorMessage) {
+          numberErrorMessage.textContent = ""; // Очистить текст ошибки
+        }
+
+        if (!numberInput.value) {
+          e.preventDefault();
+          numberInput.style.border = "solid 2px red";
+          const errorDiv = document.querySelector(".numberError");
+          errorDiv.style.color = "red";
+          errorDiv.style.marginTop = "5px";
+          errorDiv.textContent = "Введите количество человек.";
+          return;
+        } else if (!/^\d+$/.test(numberInput.value)) {
+          // Проверка, чтобы ввод содержал только цифры
+          e.preventDefault();
+          numberInput.style.border = "solid 2px red";
+          const errorDiv = document.querySelector(".numberError");
+          errorDiv.style.color = "red";
+          errorDiv.style.marginTop = "5px";
+          errorDiv.textContent = "Количество человек должно быть числом.";
+          return;
+        } else if (Number(numberInput.value) <= 0) {
+          e.preventDefault();
+          numberInput.style.border = "solid 2px red";
+          const errorDiv = document.querySelector(".numberError");
+          errorDiv.style.color = "red";
+          errorDiv.style.marginTop = "5px";
+          errorDiv.textContent = "Количество человек должно быть больше нуля.";
+          return;
+        } else {
+          numberInput.style.border = "solid 2px green";
+        }
+
+        const inputDate = new Date(timeInput.value);
+        if (!timeInput.value) {
+          // Проверяем, заполнено ли поле
+          e.preventDefault();
+          timeInput.style.border = "solid 2px red";
+          const errorDiv = document.querySelector(".dateError");
+          errorDiv.style.color = "red";
+          errorDiv.style.marginTop = "5px";
+          errorDiv.textContent = "Пожалуйста, выберите дату и время.";
+          return;
+        } else if (inputDate < currentDate) {
+          e.preventDefault();
+          timeInput.style.border = "solid 2px red";
+
+          const errorDiv = document.querySelector(".dateError");
+          errorDiv.style.color = "red";
+          errorDiv.style.marginTop = "5px";
+          errorDiv.textContent = "Вы не можете выбрать дату раньше текущей!";
+        } else {
+          timeInput.style.border = "solid 2px green";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <title>Проверка на админа</title>
+  </head>
+  <body>
+    <div class="main-text">Проверка на админа</div>
+    <form action="/adminAut" method="post" id="tableForm">
+      <label for="name">Имя</label>
+      <input type="text" id="name" name="name" placeholder="Имя админа" />
+      <br />
+      <br />
+      <label for="password">Пароль</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Пароль"
+      />
+
+      <div class="btn-container">
+        <button type="submit" class="button-action">Войти</button>
+      </div>
+    </form>
+  </body>
+</html>

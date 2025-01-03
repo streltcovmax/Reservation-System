@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/admin.css}" />
+    <title>Админовская страница</title>
+  </head>
+  <body>
+    <!-- Шапка -->
+    <header class="header">
+      <div class="logo">Админ панель</div>
+      <div class="admin-info">
+        <span>Имя админа</span>
+        <button
+          class="button-action"
+          onclick="location.href = '/adminAut.html';"
+        >
+          Выйти
+        </button>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Сайдбар -->
+      <aside class="sidebar">
+        <nav class="sidebar-nav">
+          <ul class="sidebar-list">
+            <li><a href="#orders">Список заказов</a></li>
+            <li><a href="#users">Пользователи</a></li>
+            <li><a href="#settings">Настройки</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Основной контент -->
+      <main class="main-content">
+        <!-- Поиск -->
+        <section class="search-section">
+          <div class="search-field">
+            <input
+              type="search"
+              class="search-input"
+              placeholder="Поиск заказов"
+            />
+            <a href="#" class="search-btn"
+              ><img th:src="@{/img/search.png}" alt="Поиск"
+            /></a>
+          </div>
+        </section>
+
+        <!-- Список заказов -->
+        <section class="orders-section" id="orders">
+          <h2>Список заказов</h2>
+          <div class="orders-clients">
+            <table class="orders-table">
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Клиент</th>
+                  <th>Столик</th>
+                  <th>Дата</th>
+                  <th>Время</th>
+                  <th>Статус</th>
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Иван Иванов</td>
+                  <td>5</td>
+                  <td>03.01.2025</td>
+                  <td>19:00</td>
+                  <td>Подтвержден</td>
+                  <td>
+                    <button class="edit-btn button-action">
+                      Редактировать
+                    </button>
+                    <button class="delete-btn button-action">Удалить</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Анна Смирнова</td>
+                  <td>12</td>
+                  <td>03.01.2025</td>
+                  <td>20:00</td>
+                  <td>В ожидании</td>
+                  <td>
+                    <button class="edit-btn button-action">
+                      Редактировать
+                    </button>
+                    <button class="delete-btn button-action">Удалить</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Пользователи -->
+        <section class="users-section" id="users">
+          <h2>Пользователи</h2>
+          <p>Функционал работы с пользователями будет добавлен позже.</p>
+        </section>
+
+        <!-- Настройки -->
+        <section class="settings-section" id="settings">
+          <h2>Настройки</h2>
+          <p>Функционал настроек будет добавлен позже.</p>
+        </section>
+      </main>
+    </div>
+
+    <!-- Футер -->
+    <!--  <footer class="footer">
+      <p>© 2025 Админ Панель. Все права защищены.</p>
+    </footer> -->
+  </body>
+</html>

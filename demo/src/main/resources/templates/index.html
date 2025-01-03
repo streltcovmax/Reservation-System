@@ -1,60 +1,138 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
   <head>
-    <title>Бронирование столика</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/index.css}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <title>Лучший ресторан эвер</title>
   </head>
   <body>
-    <form th:object="${reservationData}" method="post" id="reservationForm">
-      <h1 class="main-text">Форма бронирования</h1>
+    <header class="header">
+      <div class="wrapper">
+        <div class="header-content">
+          <img th:src="@{/img/Logo.png}" alt="Tilisi" />
 
-      <label for="fullName">ФИО:</label>
-      <input type="text" id="fullName" th:field="*{fullName}" required /><br />
+          <nav class="header_nav">
+            <ul class="header_nav-list">
+              <li class="header_list-item">
+                <a class="header__list-item-btn" href="#">домой</a>
+              </li>
+              <li class="header_list-item">
+                <a class="header__list-item-btn" href="#">о ресторане</a>
+              </li>
+              <li class="header_list-item">
+                <a class="header__list-item-btn" href="#">меню</a>
+              </li>
+              <li class="header_list-item">
+                <a class="header__list-item-btn" href="#">новости</a>
+              </li>
+              <li class="header_list-item">
+                <a class="header__list-item-btn" href="#">контакты</a>
+              </li>
+            </ul>
+          </nav>
 
-      <label for="phoneNumber" class="label-name">Номер телефона:</label>
-      <input
-        type="tel"
-        id="phoneNumber"
-        th:field="*{phoneNumber}"
-        required
-      /><br />
-
-      <label for="dateTime">Дата и время:</label>
-      <input
-        type="datetime-local"
-        id="dateTime"
-        th:field="*{dateTime}"
-        required
-      /><br />
-
-      <label for="tableNumber">Номер столика:</label>
-      <input
-        type="number"
-        id="tableNumber"
-        th:field="*{tableNumber}"
-        required
-      /><br />
-
-      <label for="numberOfPeople">Количество человек:</label>
-      <input
-        type="number"
-        id="numberOfPeople"
-        th:field="*{numberOfPeople}"
-        required
-      /><br />
-      <div class="order-checkbox">
-        <label for="orderNow">Заказать еду сейчас:</label>
-        <input type="checkbox" id="orderNow" th:field="*{orderNow}" /><br />
+          <a class="header_btn" href="/tables">Забронировать</a>
+        </div>
       </div>
-      <br />
-      <label for="comment">Комментарий:</label>
-      <textarea id="comment" th:field="*{comment}"></textarea><br />
-      <button type="submit" id="submitForm">Отправить</button>
-    </form>
+    </header>
+    <main class="main">
+      <div class="wrapper">
+        <div class="intro intro-disable"></div>
+        <div class="section section-disable">
+          <div class="section-block">
+            <div class="section-items">
+              <div class="section-item items-group">
+                <img
+                  th:src="@{/img/Delicious lobster gourmet seafood.png}"
+                  alt=""
+                />
 
-    <!--    <div th:if="${successMessage}">-->
-    <!--      <p th:text="${successMessage}" style="color: green"></p>-->
-    <!--    </div>-->
-    <script type="text/javascript" th:src="@{/script.js}"></script>
+                <img
+                  th:src="@{/img/Side view cook making delicious pasta.png}"
+                  alt=""
+                />
+              </div>
+              <div class="section-item">
+                <img th:src="@{/img/Delicious pasta on plate.png}" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="section-block">
+            <div class="section-text">
+              Lorem ipsum dolor sit amet, qui blanditiis praesentium voluptatum
+              deleniti atque corrupti, quos dolores et quas molestias excepturi
+              sint, ut aut reiciendis voluptatibus maiores alias consequatur aut
+              perferendis doloribus asperiores repellat! Quis autem vel eum iure
+              reprehenderit, unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam eaque ipsa,
+              nisi ut aliquid ex ea commodi consequatur! Ut enim ad minim
+              veniam, unde omnis iste natus error sit voluptatem accusantium
+              doloremque laudantium, totam rem aperiam eaque ipsa, velit esse
+              cillum dolore eu fugiat nulla pariatur.
+            </div>
+          </div>
+        </div>
+
+        <div class="section section-disable">
+          <div class="section-block">
+            <div class="section-text">
+              Temporibus autem quibusdam et aut officiis debitis aut rerum
+              necessitatibus saepe eveniet, qui blanditiis praesentium
+              voluptatum deleniti atque corrupti, quos dolores et quas molestias
+              excepturi sint, quae ab illo inventore veritatis et quasi
+              architecto beatae vitae dicta sunt, explicabo. Sed ut
+              perspiciatis, unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam eaque ipsa,
+              qui dolorem eum fugiat, quo voluptas nulla pariatur! Et harum
+              quidem rerum facilis est et expedi ta distinctio, consectetur
+              adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Excepteur sint occaecat cupidatat non
+              proident, quia voluptas sit, aspernatur aut odit aut fugit, sed
+              quia consequuntur magni dolores eos, qui ratione voluptatem sequi
+              nesciunt,...
+            </div>
+          </div>
+
+          <div class="section-block">
+            <div class="section-items">
+              <div class="section-item">
+                <img
+                  th:src="@{/img/Top view delicious pasta on plate.png}"
+                  alt=""
+                />
+              </div>
+              <div class="section-item items-group">
+                <img
+                  th:src="@{/img/Pasta in the shape heart salad with tomatoes, cucumbers, olives, mozzarella and red onion greek style. flat lay. top view.png}"
+                  alt=""
+                />
+
+                <img th:src="@{/img/Friied eggs with vegetables.png}" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer footer-disable">
+      <div class="wrapper">
+        <div class="footer_content">
+          <div class="footer_container">
+            <div>Наш телефон:</div>
+            <b>+7(909)565-34-56</b>
+          </div>
+          <div class="footer_container">
+            <div>График работы:</div>
+            <b>ВС-ЧТ - 12:00-00:00</b>
+            <b>ПТ-СБ - 12:00-05:00</b>
+          </div>
+          <div class="footer_container">
+            <div>Прийти к нам:</div>
+            <b>Краснодар, Ставропольская, 23</b>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
