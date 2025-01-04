@@ -17,7 +17,7 @@ public class OrderData {
     private long id;
 
     private LocalDateTime dateTime;
-    private int numberOfPeople = 2;
+    private int numberOfPeople;
     private String fullName;
     private String phoneNumber;
     private String comment;

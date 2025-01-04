@@ -25,8 +25,8 @@ public class OrderController {
     public String saveOrder(HttpSession session, Model model){
         OrderData data = (OrderData) session.getAttribute("orderData");
         if(data == null) {
-            log.error("order data is null");
-            return "index";
+            log.info("order data is null");
+            return "redirect:/";
         }
 
         data.setId(incrementService.generateCounter(OrderData.COUNTER_NAME));
@@ -34,6 +34,7 @@ public class OrderController {
         log.info(String.valueOf(data));
         orderRepo.save(data);
         tableService.addOrderToTable(data.getId(), data.getTableNumber());
+        session.invalidate();
         return "result";
     }
 }
