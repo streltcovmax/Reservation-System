@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Бронирование столика</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+</head>
+<body>
+<div class="blurred-background"></div>
+<form
+        th:action="@{/reservation}"
+        th:object="${orderData}"
+        method="post"
+        id="reservationForm"
+        name="reservationForm"
+>
+  <div class="main-text">Контактные данные</div>
+
+  <input
+          placeholder="ФИО"
+          class="fullname input-field"
+          type="text"
+          id="fullName"
+          th:field="*{fullName}"
+          data-reg="^[А-Я][а-яА-Я\-]{0,}\s[А-Я][а-яА-Я\-]{1,}(\s[А-Я][а-яА-Я\-]{1,})?$"
+  /><label for="fullName">Только русские буквы</label>
+  <br />
+
+  <input
+          placeholder="Номер телефона"
+          class="phoneNumber input-field"
+          type="tel"
+          id="phoneNumber"
+          th:field="*{phoneNumber}"
+          data-reg="^((\+7|7|8)+([0-9]){10})$"
+  /><label for="fullName"
+>В формате +79000000000, 79000000000, 89000000000</label
+>
+  <br />
+
+  <div class="order-checkbox">
+    <label for="orderNow">Заказать еду сейчас:</label>
+    <input type="checkbox" id="orderNow" th:field="*{orderNow}" /><br />
+  </div>
+  <br />
+
+  <textarea
+          placeholder="Комментарий"
+          class="comment-area input-field"
+          id="comment"
+          th:field="*{comment}"
+  ></textarea
+  ><br />
+  <div class="btn-container">
+    <button
+            class="button-action"
+            type="button"
+            onclick="location.href = '/tables';"
+    >
+      Назад
+    </button>
+    <button
+            class="button-action"
+            type="submit"
+            id="submitForm"
+            name="submitForm"
+    >
+      Далее
+    </button>
+  </div>
+</form>
+
+<script type="text/javascript" th:src="@{/js/validation_contact.js}"></script>
+</body>
+</html>
