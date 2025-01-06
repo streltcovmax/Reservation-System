@@ -71,13 +71,11 @@
                     <tbody>
                         <tr >
                             <form method="post" th:action="@{/admin/orders.search}" th:object="${searchData}">
-                                <th><input th:field="*{id}" type="number" id="searchId"/></th>
+                                <th><input th:field="*{id}" type="text" id="searchId"/></th>
                                 <th><input th:field="*{fullName}" type="text" id="searchName"/></th>
                                 <th><input th:field="*{tableNumber}" type="number" id="searchTable"/></th>
                                 <th><input th:field="*{numberOfPeople}" type="number" id="searchPeople"/></th>
-                                <th><input th:object="${date}" type="date" id="searchDate"/></th>
-<!--                                <th><input th:field="*{id}" type="text" id="searchId"/></th>-->
-<!--                                <th><input th:field="*{fullName}" type="text" id="searchName"/></th>-->
+                                <th> <input th:value="${#temporals.format(searchData.date, 'yyyy-MM-dd')}" type="date" id="searchDate" name="date"/></th>
                                 <th><input th:field="*{phoneNumber}" type="tel" id="searchPhone"/></th>
                                 <th><button type="submit">SEARCH</button></th>
                             </form>
@@ -87,8 +85,9 @@
                             <td th:text="*{order.getFullName}">Иван Иванов</td>
                             <td th:text="*{order.getTableNumber}">0</td>
                             <td th:text="*{order.getNumberOfPeople}">0</td>
-                            <td th:text="*{#temporals.format(order.getDateTime, 'dd.MM.yyyy')}">00.00.0000</td>
-                            <td th:text="*{#temporals.format(order.getDateTime, 'HH:mm')}">-00:00</td>
+                            <td th:text="*{#temporals.format(order.getDate, 'dd.MM.yyyy')}">00.00.0000</td>
+                            <td th:text="*{order.getDate}">00.00.0000</td>
+                            <td th:text="*{#temporals.format(order.getTime, 'HH:mm')}">-00:00</td>
                             <td>?Подтвержден?</td>
                             <td th:text="*{order.getPhoneNumber}">+00000</td>
                             <td th:text="*{order.getComment}">comment</td>
@@ -100,25 +99,6 @@
                             </td>
                         </tr>
                     </tbody>
-<!--                    <tr th:each="order: ${foundOrders}">-->
-<!--                        <td th:text="*{order.getId}">1</td>-->
-<!--                        <td th:text="*{order.getFullName}">Иван Иванов</td>-->
-<!--                        <td th:text="*{order.getTableNumber}">0</td>-->
-<!--                        <td th:text="*{order.getNumberOfPeople}">0</td>-->
-<!--                        <td th:text="*{#temporals.format(order.getDateTime, 'dd.MM.yyyy')}">00.00.0000</td>-->
-<!--                        <td th:text="*{#temporals.format(order.getDateTime, 'HH:mm')}">-00:00</td>-->
-<!--                        <td>?Подтвержден?</td>-->
-<!--                        <td th:text="*{order.getPhoneNumber}">+00000</td>-->
-<!--                        <td th:text="*{order.getComment}">comment</td>-->
-<!--                        <td>-->
-<!--                            <button class="edit-btn button-action">-->
-<!--                                Редактировать-->
-<!--                            </button>-->
-<!--                            <button class="delete-btn button-action">Удалить</button>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-
-
                 </table>
             </div>
         </section>

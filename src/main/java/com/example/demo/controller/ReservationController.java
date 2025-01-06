@@ -32,7 +32,9 @@ public class ReservationController {
     public String submitReservationForm(OrderData data, HttpSession session) {
         data.setTableNumber(((TableReservationData)session.getAttribute("tableData")).getTableNumber());
         data.setNumberOfPeople(((TableReservationData)session.getAttribute("tableData")).getNumberOfPeople());
-        data.setDateTime(((TableReservationData)session.getAttribute("tableData")).getDateTime());
+//        data.setDateTime(((TableReservationData)session.getAttribute("tableData")).getDateTime());
+        data.setDate(((TableReservationData)session.getAttribute("tableData")).getDateTime().toLocalDate());
+        data.setTime(((TableReservationData)session.getAttribute("tableData")).getDateTime().toLocalTime());
         session.setAttribute("orderData", data);
         log.info(data.toString());
         return "order";

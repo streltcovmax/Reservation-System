@@ -31,7 +31,7 @@ public class TableService {
                 for (Long orderId : table.getOrdersId()) {
                     log.info("current id to check is " + orderId);
                     try {
-                        isBusy = orderRepo.findOrderDataById(orderId).getDateTime().getDayOfYear() == dateTime.getDayOfYear();
+                        isBusy = orderRepo.findOrderDataById(orderId).getDate() == dateTime.toLocalDate();
                         if (isBusy) {
                             log.info(table.getId() + "is busy");
                             break;

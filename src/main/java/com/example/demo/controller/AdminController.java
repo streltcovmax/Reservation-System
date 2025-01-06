@@ -52,7 +52,6 @@ public class AdminController {
             log.info("MODEL: " + model.toString());
             log.info("Added that^ admin data to model");
             model.addAttribute("searchData", new OrderData());
-            model.addAttribute("date");
             return "admin";
         }
         return "redirect:/adminAut";
@@ -77,15 +76,13 @@ public class AdminController {
 
 
     @PostMapping("/admin/orders.search")
-    public String searchAndUpdate(OrderData inputData, LocalDate date, Model model, HttpSession session){
-        inputData.setDateTime(LocalDateTime.of(date, LocalTime.of(1, 0)));
-//        List<OrderData> foundData = orderRepository.findAllByFullName(inputData.getFullName());
-//        log.info("SEARCHING BY " + inputData.getFullName() +  " FOUND THIS: " + foundData.toString());
+    public String searchAndUpdate(OrderData inputData, Model model, HttpSession session){
+
         model.addAttribute("adminData", session.getAttribute("adminData"));
         model.addAttribute("searchData", inputData);
-        model.addAttribute("date", date);
+        List<OrderData> foundOrders = orderService.findByOrderData(inputData);
         log.info(inputData.toString());
-//        model.addAttribute("foundOrders", foundData);
+        model.addAttribute("foundOrders", foundOrders);
         return "admin";
     }
 

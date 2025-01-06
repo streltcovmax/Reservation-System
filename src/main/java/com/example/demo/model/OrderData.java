@@ -4,7 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @Document(collection = "OrderData")
@@ -14,13 +16,15 @@ public class OrderData {
     public static final String COUNTER_NAME = "OrderData_counter";
 
     @Id
-    private long id;
+    private Long id;
 
-    private LocalDateTime dateTime;
-    private int numberOfPeople;
+//    private LocalDateTime dateTime;
+    private LocalDate date;
+    private LocalTime time;
+    private Integer numberOfPeople;
     private String fullName;
     private String phoneNumber;
     private String comment;
     private boolean orderNow;
-    private int tableNumber;
+    private Integer tableNumber;
 }
