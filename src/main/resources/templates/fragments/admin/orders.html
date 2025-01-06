@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/admin.css}" />
+    <title>встраиваемый фрагмент</title>
+</head>
+<body>
+    <div th:fragment="foundOrders">
+            ФРАГМЕНТ ФРАГМЕНТЫЧ
+            <tr th:each="order: ${foundOrders}">-->
+                <td th:text="*{order.getId}">1</td>
+                <td th:text="*{order.getFullName}">Иван Иванов</td>
+                <td th:text="*{order.getTableNumber}">0</td>
+                <td th:text="*{order.getNumberOfPeople}">0</td>
+                <td th:text="*{#temporals.format(order.getDateTime, 'dd.MM.yyyy')}">00.00.0000</td>
+                <td th:text="*{#temporals.format(order.getDateTime, 'HH:mm')}">-00:00</td>
+                <td>?Подтвержден?</td>
+                <td th:text="*{order.getPhoneNumber}">+00000</td>
+                <td th:text="*{order.getComment}">comment</td>
+                <td>
+                    <button class="edit-btn button-action">
+                        Редактировать
+                    </button>
+                    <button class="delete-btn button-action">Удалить</button>
+                </td>
+            </tr>
+    </div>
+</body>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Бронирование столика</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+</head>
+<body>
+<div class="blurred-background"></div>
+<form th:object="${tableData}" method="post" id="tableForm">
+  <div class="main-text">Выберите дату бронирования</div>
+
+  <label for="dateTime">Дата и время:</label>
+<!--  вынужденные меры для конвертации форматов-->
+  <input
+          type="datetime-local"
+          id="dateTime"
+          th:value="*{#temporals.format(dateTime, 'yyyy-MM-dd''T''HH:mm')}"
+          name="dateTime"
+          required
+  /><br />
+
+  <br />
+  <label for="numberOfPeople">Количество человек:</label>
+  <input type="number" id="numberOfPeople" th:field="*{numberOfPeople}" />
+  <div id="messageDiv">
+    <p id="message" class="hidden"></p>
+  </div>
+  <div class="btn-container">
+    <button
+            class="button-action"
+            type="button"
+            onclick="location.href = '/';"
+    >
+      Вернуться на главную
+    </button>
+
+    <button
+            class="button-action"
+            type="submit"
+            id="submitForm"
+            name="submitForm"
+    >
+      Далее
+    </button>
+  </div>
+</form>
+<script type="text/javascript" th:src="@{/js/tables.js}"></script>
+</body>
+</html>
