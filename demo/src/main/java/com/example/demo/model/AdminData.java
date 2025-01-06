@@ -5,9 +5,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document
-public class IncrementCounter {
+@Document(collection = "AdminData")
+public class AdminData {
     @Id
-    private String id;
-    private Long counter;
+    private String name;
+    private String password;
+    private Role role;
 }

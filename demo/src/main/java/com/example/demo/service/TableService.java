@@ -25,20 +25,27 @@ public class TableService {
         log.info(capableTables.toString());
 
         for (Table table: capableTables){
-            //TODO проверка на NULL?
-            //TODO без цикла?
 
             boolean isBusy = false;
-            for (Long orderId: table.getOrdersId()){
-                isBusy = orderRepo.findOrderDataById(orderId).getDateTime().getDayOfYear() == dateTime.getDayOfYear();
-                if(isBusy){
-                    log.info(table.getId() + "is busy");
-                    break;
+            try {
+                for (Long orderId : table.getOrdersId()) {
+                    log.info("current id to check is " + orderId);
+                    try {
+                        isBusy = orderRepo.findOrderDataById(orderId).getDate() == dateTime.toLocalDate();
+                        if (isBusy) {
+                            log.info(table.getId() + "is busy");
+                            break;
+                        }
+                        log.info(table.getId() + "is NOT busy");
+                    } catch (NullPointerException exception) {
+                        log.error("К столу " + table.getId() + " прикреплен несуществующий заказ " + orderId);
+                    }
                 }
-                log.info(table.getId() + "is NOT busy");
-            }
-            if(!isBusy){
-                return table.getId();
+                if (!isBusy) {
+                    return table.getId();
+                }
+            }catch (NullPointerException exception){
+                log.warn("Стол " + table.getId() + " записан в БД некорректно");
             }
         }
         return -1;

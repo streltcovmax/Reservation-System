@@ -19,8 +19,11 @@
       <p class="result-row" th:text="'Номер телефона: ' + *{phoneNumber}">
         Номер телефона: значение
       </p>
-      <p class="result-row" th:text="'Время бронирования: ' + *{dateTime}">
-        Дата и время
+      <p class="result-row" th:text="'Дата бронирования: ' + *{#temporals.format(date, 'dd.MM.yyyy')}">
+        Дата
+      </p>
+      <p class="result-row" th:text="'Время бронирования: ' +  *{#temporals.format(time, 'HH:mm')}">
+        Время
       </p>
       <p
               class="result-row"

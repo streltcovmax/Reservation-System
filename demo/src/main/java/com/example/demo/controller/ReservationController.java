@@ -28,12 +28,15 @@ public class ReservationController {
         return "contact";
     }
 
+    //Не уверен что здесь нужна модель, без нее тоже работало, но иде ругалась
     @PostMapping("/reservation")
-    public String submitReservationForm(OrderData data, HttpSession session) {
+    public String submitReservationForm(OrderData data, HttpSession session, Model model) {
         data.setTableNumber(((TableReservationData)session.getAttribute("tableData")).getTableNumber());
         data.setNumberOfPeople(((TableReservationData)session.getAttribute("tableData")).getNumberOfPeople());
-        data.setDateTime(((TableReservationData)session.getAttribute("tableData")).getDateTime());
+        data.setDate(((TableReservationData)session.getAttribute("tableData")).getDateTime().toLocalDate());
+        data.setTime(((TableReservationData)session.getAttribute("tableData")).getDateTime().toLocalTime());
         session.setAttribute("orderData", data);
+        model.addAttribute("orderData", data);
         log.info(data.toString());
         return "order";
     }
