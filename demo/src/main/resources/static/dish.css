@@ -1,0 +1,74 @@
+.wrapper {
+  width: 100%;
+
+  margin: 0 auto;
+}
+
+.button-action {
+  padding: 5px;
+  height: 2rem;
+  margin: 0 2rem;
+  border: 1px solid #ccc;
+  border-radius: 4rem;
+}
+
+.header-content {
+  background-color: #1e1e1e;
+  padding: 40px 0;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+
+  color: #fff;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.header {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.dish-panel {
+  width: 300px;
+  color: #fff;
+
+  background-color: #1e1e1e;
+}
+.dish-name {
+  text-align: center;
+}
+.dish-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.dish-icon {
+  height: 200px;
+  width: 300px;
+  background-image: url("./img/pelmeni-iz-shchuki_1542889920_1_max-3928318386.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
