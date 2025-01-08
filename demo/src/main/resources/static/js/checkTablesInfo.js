@@ -1,5 +1,8 @@
 let tableId = null;
 
+//Изменение состояния кнопки "далее" и вывод сообщения об отсутствии столов
+//Здесь же валидация
+//Используется втч на адм панели
 function fetchTableInfo(submitButton, dateTimeField, dateTimeValue, peopleField, messageDiv){
     const peopleValue = peopleField.value;
     const currentDate = new Date();
