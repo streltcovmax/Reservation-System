@@ -5,6 +5,7 @@ import com.example.demo.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.TabExpander;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final TableService tableService;
 
     public List<OrderData> findByOrderData(OrderData searchData) {
         List<List<OrderData>> matchDataList = new ArrayList<>();
@@ -49,5 +51,10 @@ public class OrderService {
         }
 
         return intersection;
+    }
+
+    public void deleteById(Long id){
+        tableService.deleteOrderFromTable(id);
+        orderRepository.deleteById(id);
     }
 }

@@ -141,22 +141,24 @@
                         <h2>Редактировать заказ</h2>
                         <form id="editForm">
                             <label for="fullName">ФИО:</label>
-                            <input type="text" id="fullName" name="fullName" />
+                            <input type="text" id="fullName" name="fullName" required/>
 
                             <label for="numberOfPeople">Кол-во людей:</label>
-                            <input type="number" id="numberOfPeople" name="numberOfPeople" />
+                            <input type="number" id="numberOfPeople" name="numberOfPeople" required/>
 
                             <label for="date">Дата:</label>
-                            <input type="date" id="date" name="date" />
+                            <input type="date" id="date" name="date" required/>
 
                             <label for="time">Время:</label>
-                            <input type="time" id="time" name="time" />
+                            <input type="time" id="time" name="time" required/>
 
                             <label for="phoneNumber">Телефон:</label>
-                            <input type="tel" id="phoneNumber" name="phoneNumber" />
+                            <input type="tel" id="phoneNumber" name="phoneNumber" required/>
 
                             <label for="comment">Комментарий:</label>
-                            <input type="text" id="comment" name="comment" />
+                            <input type="text" id="comment" name="comment" required/>
+
+                            <div id="messageDiv"></div>
 
                             <button type="button" id="saveBtn">Сохранить</button>
                         </form>
@@ -179,5 +181,6 @@
     </div>
 </main>
 <script type="text/javascript" th:src="@{/js/adminPanel.js}"></script>
+<script type="text/javascript" th:src="@{/js/checkTablesInfo.js}"></script>
 </body>
 </html>

@@ -118,3 +118,11 @@ th {
     color: black;
     text-decoration: none;
 }
+
+.incorrect{
+    border: 2px solid red;
+}
+
+input:focus {
+    outline: none;
+}
