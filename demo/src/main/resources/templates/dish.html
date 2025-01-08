@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/demo/src/main/resources/static/dish.css"
+    />
+    <title>Блюда</title>
+    <style></style>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Меню Блюд</h1>
+      <nav>
+        <ul>
+          <li><a href="#hot-dishes">Горячее</a></li>
+          <li><a href="#salads">Салаты</a></li>
+          <li><a href="#desserts">Десерты</a></li>
+          <li><a href="#drinks">Напитки</a></li>
+          <li><a href="#specials">Специальные предложения</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="hot-dishes">
+        <h2>Горячие блюда</h2>
+        <p>Описание горячих блюд...</p>
+
+        <div class="dish-panel">
+          <div>
+            <div class="dish-icon">
+              <img
+                th:src="@{/pelmeni-iz-shchuki_1542889920_1_max-3928318386.jpg}"
+              />
+            </div>
+            <h2 class="dish-name">Пельмени</h2>
+            <div class="dish-info">
+              <p class="dish-price">Цена: 250 руб.</p>
+
+              <button class="add-to-cart button-action">Добавить</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="salads">
+        <h2>Салаты</h2>
+        <p>Описание салатов...</p>
+      </section>
+      <section id="desserts">
+        <h2>Десерты</h2>
+        <p>Описание десертов...</p>
+      </section>
+      <section id="drinks">
+        <h2>Напитки</h2>
+        <p>Описание напитков...</p>
+      </section>
+      <section id="specials">
+        <h2>Специальные предложения</h2>
+        <p>Описание специальных предложений...</p>
+      </section>
+    </main>
+  </body>
+</html>
