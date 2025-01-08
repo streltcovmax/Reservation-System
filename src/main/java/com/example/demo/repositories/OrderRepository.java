@@ -9,8 +9,8 @@ import java.util.List;
 public interface OrderRepository extends MongoRepository<OrderData, Long> {
     OrderData findOrderDataById(Long id);
 
-    List<OrderData> findAllByFullName(String fullName);
-    List<OrderData> findAllByPhoneNumber(String phone);
+    List<OrderData> findAllByFullNameContains(String fullName);
+    List<OrderData> findAllByPhoneNumberContains(String phone);
     List<OrderData> findAllByTableNumber(int number);
     List<OrderData> findAllByNumberOfPeople(int number);
     List<OrderData> findAllById(Long id);

@@ -3,17 +3,17 @@ package com.example.demo.service;
 import com.example.demo.model.OrderData;
 import com.example.demo.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.TabExpander;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final TableService tableService;
 
     public List<OrderData> findByOrderData(OrderData searchData) {
         List<List<OrderData>> matchDataList = new ArrayList<>();
@@ -32,11 +32,11 @@ public class OrderService {
             matchDataList.add(matchByPeople);
         }
         if (searchData.getFullName() != null && !searchData.getFullName().isEmpty()) {
-            List<OrderData> matchByName = orderRepository.findAllByFullName(searchData.getFullName());
+            List<OrderData> matchByName = orderRepository.findAllByFullNameContains(searchData.getFullName());
             matchDataList.add(matchByName);
         }
         if (searchData.getPhoneNumber() != null && !searchData.getPhoneNumber().isEmpty()) {
-            List<OrderData> matchByPhone = orderRepository.findAllByPhoneNumber(searchData.getPhoneNumber());
+            List<OrderData> matchByPhone = orderRepository.findAllByPhoneNumberContains(searchData.getPhoneNumber());
             matchDataList.add(matchByPhone);
         }
         if (searchData.getDate() != null) {
@@ -51,5 +51,10 @@ public class OrderService {
         }
 
         return intersection;
+    }
+
+    public void deleteById(Long id){
+        tableService.deleteOrderFromTable(id);
+        orderRepository.deleteById(id);
     }
 }

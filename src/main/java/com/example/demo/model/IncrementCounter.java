@@ -9,5 +9,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class IncrementCounter {
     @Id
     private String id;
-    private long counter;
+    private Long counter;
 }

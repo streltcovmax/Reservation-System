@@ -32,9 +32,16 @@ public class OrderController {
         data.setId(incrementService.generateCounter(OrderData.COUNTER_NAME));
         model.addAttribute("orderData", data);
         log.info(String.valueOf(data));
-        orderRepo.save(data);
-        tableService.addOrderToTable(data.getId(), data.getTableNumber());
-        session.invalidate();
-        return "result";
+        try{
+            orderRepo.save(data);
+            tableService.addOrderToTable(data.getId(), data.getTableNumber());
+            session.invalidate();
+            //посылать сообщение админу
+            return "result";
+        }
+        catch (Exception exc){
+            log.error("НЕ УДАЛОСЬ СОЗДАТЬ ЗАКАЗ " + exc.getMessage());
+            return "redirect:/reservation";
+        }
     }
 }

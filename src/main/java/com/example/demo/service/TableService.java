@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.OrderData;
 import com.example.demo.model.Table;
 import com.example.demo.repositories.OrderRepository;
 import com.example.demo.repositories.TableRepository;
@@ -31,7 +32,9 @@ public class TableService {
                 for (Long orderId : table.getOrdersId()) {
                     log.info("current id to check is " + orderId);
                     try {
-                        isBusy = orderRepo.findOrderDataById(orderId).getDate() == dateTime.toLocalDate();
+                        isBusy = orderRepo.findOrderDataById(orderId).getDate().toString().equals(dateTime.toLocalDate().toString());
+                        log.info(orderRepo.findOrderDataById(orderId).getDate().toString() + " compared to " + dateTime.toLocalDate().toString());
+                        log.info("EQUALS: " +  isBusy);
                         if (isBusy) {
                             log.info(table.getId() + "is busy");
                             break;
@@ -60,6 +63,17 @@ public class TableService {
         List<Long> ordersList = new ArrayList<>(Arrays.asList(table.getOrdersId()));
         ordersList.add(orderId);
         table.setOrdersId(ordersList.toArray(new Long[0]));
+        tableRepo.save(table);
+    }
+
+    public void deleteOrderFromTable(long orderId){
+        int tableId = orderRepo.findOrderDataById(orderId).getTableNumber();
+        Table table = tableRepo.findById(tableId);
+        ArrayList<Long> ordersId = new ArrayList<>(List.of(table.getOrdersId()));
+        ordersId.remove(orderId);
+        Long[] newOrdersId = new Long[ordersId.size()];
+        ordersId.toArray(newOrdersId);
+        table.setOrdersId(newOrdersId);
         tableRepo.save(table);
     }
 }
