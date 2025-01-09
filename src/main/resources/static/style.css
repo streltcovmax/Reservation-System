@@ -52,9 +52,7 @@ form > label {
   display: flex;
 }
 
-.hidden {
-  display: none;
-}
+
 .btn-container {
   display: flex;
 
@@ -74,14 +72,4 @@ form > label {
   background-position: center;
   filter: blur(5px);
   z-index: -10;
-}
-input:focus {
-  outline: none;
-}
-
-input{
-  border: 1px solid #ddd;
-}
-input.incorrect{
-  border: solid 2px red;
 }

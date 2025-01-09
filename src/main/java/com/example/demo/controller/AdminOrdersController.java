@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.AdminData;
 import com.example.demo.model.OrderData;
 import com.example.demo.repositories.OrderRepository;
 import com.example.demo.service.OrderService;
@@ -11,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +25,7 @@ public class AdminOrdersController {
     private final OrderRepository orderRepository;
     private final TableService tableService;
 
+
     @PostMapping("/admin/orders.search")
     public String searchOrders(OrderData inputData, Model model, HttpSession session){
         model.addAttribute("adminData", session.getAttribute("adminData"));
@@ -36,7 +35,7 @@ public class AdminOrdersController {
         log.info(foundOrders.toString());
         model.addAttribute("foundOrders", foundOrders);
         if(foundOrders.isEmpty()) model.addAttribute("searchInfoMessage", "Ниче не найдено!");
-        return "admin";
+        return "adminOrders";
     }
 
     @DeleteMapping("/admin/orders/delete/{orderId}")

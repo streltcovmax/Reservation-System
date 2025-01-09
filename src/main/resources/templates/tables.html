@@ -3,6 +3,8 @@
 <head>
   <title>Бронирование столика</title>
   <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/funnybak.css}" />
+
 </head>
 <body>
 <div class="blurred-background"></div>
@@ -38,13 +40,14 @@
     <button
             class="button-action"
             type="submit"
-            id="submitForm"
-            name="submitForm"
+            id="submitButton"
+            name="submitButton"
     >
       Далее
     </button>
   </div>
 </form>
+<script type="text/javascript" th:src="@{/js/checkTablesInfo.js}"></script>
 <script type="text/javascript" th:src="@{/js/tables.js}"></script>
 </body>
 </html>

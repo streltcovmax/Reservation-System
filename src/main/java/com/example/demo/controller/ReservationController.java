@@ -38,7 +38,7 @@ public class ReservationController {
         session.setAttribute("orderData", data);
         model.addAttribute("orderData", data);
         log.info(data.toString());
+//        if(data.isOrderNow()) return "redirect:/menu";
         return "order";
     }
-
 }

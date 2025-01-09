@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.model.AdminData;
 import com.example.demo.model.OrderData;
+import com.example.demo.model.Role;
+import com.example.demo.model.menu.Ingredient;
 import com.example.demo.repositories.AdminRepository;
 import com.example.demo.repositories.OrderRepository;
 import com.example.demo.service.OrderService;
@@ -21,6 +23,7 @@ import java.util.List;
 public class AdminController {
 
     private final AdminRepository adminRepository;
+    private Role role;
 
 
     @GetMapping("/adminAut")
@@ -32,17 +35,24 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String adminPanel(HttpSession session, Model model) {
-        log.info("ADMIN GET MAPPING");
         var isAdmin = session.getAttribute("isAdmin");
         var adminData = session.getAttribute("adminData");
-        log.info("from panel enter IS ADMIN: " + isAdmin);
-        log.info("from panel enter ADMIN DATA is session: " + adminData);
         if (isAdmin != null && (boolean) isAdmin && adminData != null) {
             model.addAttribute("adminData", adminData);
-            log.info("MODEL: " + model.toString());
-            log.info("Added that^ admin data to model");
-            model.addAttribute("searchData", new OrderData());
-            return "admin";
+            switch (((AdminData)adminData).getRole()){
+                case ORDERS:
+                    model.addAttribute("searchData", new OrderData());
+                    return "adminOrders";
+                case STORAGE:
+                    model.addAttribute("searchData", new Ingredient());
+                    return "adminStorage";
+                case HALL:
+                    return "adminHall";
+                case BOSS:
+                    return "adminBoss";
+
+            }
+            return "adminOrders";
         }
         return "redirect:/adminAut";
     }
