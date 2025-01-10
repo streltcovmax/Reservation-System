@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.OrderData;
 import com.example.demo.model.Table;
 import com.example.demo.repositories.OrderRepository;
 import com.example.demo.repositories.TableRepository;
@@ -25,20 +26,29 @@ public class TableService {
         log.info(capableTables.toString());
 
         for (Table table: capableTables){
-            //TODO проверка на NULL?
-            //TODO без цикла?
 
             boolean isBusy = false;
-            for (Long orderId: table.getOrdersId()){
-                isBusy = orderRepo.findOrderDataById(orderId).getDateTime().getDayOfYear() == dateTime.getDayOfYear();
-                if(isBusy){
-                    log.info(table.getId() + "is busy");
-                    break;
+            try {
+                for (Long orderId : table.getOrdersId()) {
+                    log.info("current id to check is " + orderId);
+                    try {
+                        isBusy = orderRepo.findOrderDataById(orderId).getDate().toString().equals(dateTime.toLocalDate().toString());
+                        log.info(orderRepo.findOrderDataById(orderId).getDate().toString() + " compared to " + dateTime.toLocalDate().toString());
+                        log.info("EQUALS: " +  isBusy);
+                        if (isBusy) {
+                            log.info(table.getId() + "is busy");
+                            break;
+                        }
+                        log.info(table.getId() + "is NOT busy");
+                    } catch (NullPointerException exception) {
+                        log.error("К столу " + table.getId() + " прикреплен несуществующий заказ " + orderId);
+                    }
                 }
-                log.info(table.getId() + "is NOT busy");
-            }
-            if(!isBusy){
-                return table.getId();
+                if (!isBusy) {
+                    return table.getId();
+                }
+            }catch (NullPointerException exception){
+                log.warn("Стол " + table.getId() + " записан в БД некорректно");
             }
         }
         return -1;
@@ -53,6 +63,17 @@ public class TableService {
         List<Long> ordersList = new ArrayList<>(Arrays.asList(table.getOrdersId()));
         ordersList.add(orderId);
         table.setOrdersId(ordersList.toArray(new Long[0]));
+        tableRepo.save(table);
+    }
+
+    public void deleteOrderFromTable(long orderId){
+        int tableId = orderRepo.findOrderDataById(orderId).getTableNumber();
+        Table table = tableRepo.findById(tableId);
+        ArrayList<Long> ordersId = new ArrayList<>(List.of(table.getOrdersId()));
+        ordersId.remove(orderId);
+        Long[] newOrdersId = new Long[ordersId.size()];
+        ordersId.toArray(newOrdersId);
+        table.setOrdersId(newOrdersId);
         tableRepo.save(table);
     }
 }

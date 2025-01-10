@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class TableReservationData {
 
     private LocalDateTime dateTime;
-    private int numberOfPeople;
+    private Integer numberOfPeople;
     private int tableNumber;
 
 }

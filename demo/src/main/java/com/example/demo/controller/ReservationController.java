@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.OrderData;
 import com.example.demo.model.TableReservationData;
+import com.example.demo.model.menu.Basket;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,22 +21,29 @@ public class ReservationController {
     public String showReservationForm(Model model, HttpSession session) {
         OrderData orderData = new OrderData();
         OrderData sessionOrderData = (OrderData) session.getAttribute("orderData");
+        Basket sessionBasket = (Basket) session.getAttribute("basket");
         if(sessionOrderData != null){
             orderData = sessionOrderData;
             log.info(orderData.toString());
         }
+        model.addAttribute("basket", sessionBasket);
         model.addAttribute("orderData", orderData);
         return "contact";
     }
 
+    //Не уверен что здесь нужна модель, без нее тоже работало, но иде ругалась
     @PostMapping("/reservation")
-    public String submitReservationForm(OrderData data, HttpSession session) {
+    public String submitReservationForm(OrderData data, HttpSession session, Model model) {
         data.setTableNumber(((TableReservationData)session.getAttribute("tableData")).getTableNumber());
         data.setNumberOfPeople(((TableReservationData)session.getAttribute("tableData")).getNumberOfPeople());
-        data.setDateTime(((TableReservationData)session.getAttribute("tableData")).getDateTime());
+        data.setDate(((TableReservationData)session.getAttribute("tableData")).getDateTime().toLocalDate());
+        data.setTime(((TableReservationData)session.getAttribute("tableData")).getDateTime().toLocalTime());
+        Basket sessionBasket = (Basket) session.getAttribute("basket");
+        model.addAttribute("basket", sessionBasket);
         session.setAttribute("orderData", data);
+        model.addAttribute("orderData", data);
         log.info(data.toString());
+//        if(data.isOrderNow()) return "redirect:/menu";
         return "order";
     }
-
 }

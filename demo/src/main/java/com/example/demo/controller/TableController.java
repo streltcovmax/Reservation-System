@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.TableReservationData;
+import com.example.demo.repositories.DishGroupRepository;
 import com.example.demo.service.TableService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class TableController {
 
     private final TableService tableService;
+    private final DishGroupRepository drp;
 
     @GetMapping("/")
     public String redirectToIndex() {
@@ -27,6 +29,7 @@ public class TableController {
     
     @GetMapping("/tables")
     public String showTableForm(HttpSession session, Model model) {
+        log.info("OOO DISHES " +  drp.findAll().toString());
         TableReservationData tableData = new TableReservationData();
         TableReservationData sessionTableData = (TableReservationData) session.getAttribute("tableData");
         if(sessionTableData != null){
