@@ -3,6 +3,8 @@
 <head>
   <title>Бронирование столика</title>
   <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/stuff.css}" />
+
 </head>
 <body>
 <div class="blurred-background"></div>
@@ -18,6 +20,7 @@
           name="dateTime"
           required
   /><br />
+
 
   <br />
   <label for="numberOfPeople">Количество человек:</label>
@@ -37,14 +40,14 @@
     <button
             class="button-action"
             type="submit"
-            id="submitForm"
-            name="submitForm"
+            id="submitButton"
+            name="submitButton"
     >
       Далее
     </button>
   </div>
 </form>
-<!--<script type="text/javascript" th:src="@{/js/validation_tables.js}"></script>-->
+<script type="text/javascript" th:src="@{/js/checkTablesInfo.js}"></script>
 <script type="text/javascript" th:src="@{/js/tables.js}"></script>
 </body>
 </html>

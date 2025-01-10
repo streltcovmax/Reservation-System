@@ -3,6 +3,8 @@
 <head>
   <title>Бронирование столика</title>
   <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/funnyback.css}" />
+
 </head>
 <body>
 <div class="blurred-background"></div>
@@ -37,11 +39,11 @@
 >
   <br />
 
-  <div class="order-checkbox">
+  <div class="order-checkbox" th:if="${basket} == null">
     <label for="orderNow">Заказать еду сейчас:</label>
     <input type="checkbox" id="orderNow" th:field="*{orderNow}" /><br />
   </div>
-  <br />
+  <br/>
 
   <textarea
           placeholder="Комментарий"

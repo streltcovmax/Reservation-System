@@ -3,6 +3,9 @@
   <head>
     <title>Ваш заказ</title>
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/funnybak.css}" />
+
+
     <script type="text/javascript">
       //чтобы нельзя было нажать "назад" и вернуться сюда после получения номера заказа
       window.history.forward();
@@ -10,7 +13,6 @@
   </head>
   <body>
   <div class="blurred-background"></div>
-  <!-- href="../static/order.css" -->
   <div class="result">
     <div class="main-text">Проверьте информацию о заказе</div>
 
@@ -19,8 +21,11 @@
       <p class="result-row" th:text="'Номер телефона: ' + *{phoneNumber}">
         Номер телефона: значение
       </p>
-      <p class="result-row" th:text="'Время бронирования: ' + *{dateTime}">
-        Дата и время
+      <p class="result-row" th:text="'Дата бронирования: ' + *{#temporals.format(date, 'dd.MM.yyyy')}">
+        Дата
+      </p>
+      <p class="result-row" th:text="'Время бронирования: ' +  *{#temporals.format(time, 'HH:mm')}">
+        Время
       </p>
       <p
               class="result-row"
@@ -29,8 +34,8 @@
         Количество персон: значение
       </p>
 
-      <p class="result-row" th:text="'Сейчас заказывать: ' + *{orderNow}">
-        Сейчас заказывать: значение
+      <p class="result-row" th:if="${basket}==null" th:text="'Заказать еду сейчас: ' + (*{orderNow} ? 'да' : 'нет')">
+        Заказать еду сейчас: значение
       </p>
 
       <p class="result-row" th:text="'Комментарий: ' + *{comment}">
@@ -47,9 +52,9 @@
       </button>
       <button
               class="button-action"
-              onclick="location.href = '/processedOrder'"
-      >
-        Всё верно!
+              th:text="${orderData.orderNow} ? 'Перейти в меню' : 'Оформить заказ'"
+              th:attr="onclick=${orderData.orderNow} ? 'location.href=\'/menu\'' : 'location.href=\'/processedOrder\''">
+        Нопока
       </button>
     </div>
   </div>

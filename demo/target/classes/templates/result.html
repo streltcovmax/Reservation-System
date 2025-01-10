@@ -3,6 +3,9 @@
 <head>
   <title>Заказ создан</title>
   <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/funnybak.css}" />
+
+
 </head>
 <body>
 <div class="blurred-background"></div>
@@ -16,6 +19,14 @@
     <p class="result-row" th:text="'Столик: ' + *{tableNumber}">
       Столик: значение
     </p>
+    <div th:if="${orderData.isOrderNow()}">
+      <p th:text="${basket.totalCost} + ' руб.'"> </p>
+      <ul class="result-row">
+        <li th:each="entry : ${basket.dishes}">
+          <span th:text="${entry.key} + ' (' + ${entry.value} + ' шт.)'"></span>
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="btn-container">
     <button
