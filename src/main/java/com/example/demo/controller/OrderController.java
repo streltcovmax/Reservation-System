@@ -34,7 +34,7 @@ public class OrderController {
         Basket basket = (Basket) session.getAttribute("basket");
         if(data == null) {
             log.info("order data is null");
-            return "redirect:/";
+            return "redirect:/tables";
         }
         data.setId(incrementService.generateCounter(OrderData.COUNTER_NAME));
         model.addAttribute("orderData", data);

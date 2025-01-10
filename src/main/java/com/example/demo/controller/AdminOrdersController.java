@@ -38,6 +38,7 @@ public class AdminOrdersController {
         return "adminOrders";
     }
 
+
     @DeleteMapping("/admin/orders/delete/{orderId}")
     public ResponseEntity<String> deleteOrder(@PathVariable Long orderId){
         log.info(orderId.toString());

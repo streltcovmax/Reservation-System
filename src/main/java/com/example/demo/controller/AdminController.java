@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.example.demo.model.Role.*;
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 public class AdminController {
 
     private final AdminRepository adminRepository;
-    private Role role;
-
 
     @GetMapping("/adminAut")
     public String adminLogin(Model model) {
@@ -35,19 +35,15 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String adminPanel(HttpSession session, Model model) {
-        var isAdmin = session.getAttribute("isAdmin");
+//        var isAdmin = session.getAttribute("isAdmin");
         var adminData = session.getAttribute("adminData");
-        if (isAdmin != null && (boolean) isAdmin && adminData != null) {
+        if (adminData != null) {
             model.addAttribute("adminData", adminData);
             switch (((AdminData)adminData).getRole()){
                 case ORDERS:
-                    model.addAttribute("searchData", new OrderData());
-                    return "adminOrders";
+                    return "redirect:/admin/orders";
                 case STORAGE:
-                    model.addAttribute("searchData", new Ingredient());
-                    return "adminStorage";
-                case HALL:
-                    return "adminHall";
+                    return "redirect:/admin/storage";
                 case BOSS:
                     return "adminBoss";
 
@@ -58,7 +54,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin.check")
-    public ResponseEntity<Boolean> checkIfAdmin(@RequestBody AdminData inputData, HttpSession session) {
+    public ResponseEntity<Boolean> checkLoginPass(@RequestBody AdminData inputData, HttpSession session) {
         AdminData foundData = adminRepository.findByName(inputData.getName());
         boolean isAdmin = foundData != null && inputData.getPassword().equals(foundData.getPassword());
         log.info("from check IS ADMIN: " + isAdmin);
@@ -74,4 +70,51 @@ public class AdminController {
         return "redirect:/adminAut";
     }
 
+
+    @GetMapping("/admin/orders")
+    public String adminOrders(HttpSession session, Model model){
+        AdminData adminData = (AdminData) session.getAttribute("adminData");
+        if(stillAdmin(adminData, ORDERS)){
+            model.addAttribute("searchData", new OrderData());
+            model.addAttribute("adminData", adminData);
+            return "adminOrders";
+        }
+        else{
+            return "redirect:/admin.logout";
+        }
+
+    }
+
+    @GetMapping("/admin/storage")
+    public String adminStorage(HttpSession session, Model model){
+        AdminData adminData = (AdminData) session.getAttribute("adminData");
+        if(stillAdmin(adminData, STORAGE)){
+            model.addAttribute("searchData", new Ingredient());
+            model.addAttribute("adminData", adminData);
+            return "adminStorage";
+        }
+        else{
+            return "redirect:/admin.logout";
+        }
+
+    }
+
+    @GetMapping("/admin/stuff")
+    public String adminStuff(HttpSession session, Model model){
+        AdminData adminData = (AdminData) session.getAttribute("adminData");
+        if(stillAdmin(adminData, BOSS)){
+            model.addAttribute("searchData", new AdminData());
+            model.addAttribute("adminData", adminData);
+            return "adminStuff";
+        }
+        else{
+            return "redirect:/admin.logout";
+        }
+
+    }
+
+    private boolean stillAdmin(AdminData sessionData, Role role){
+        if(sessionData == null) return false;
+        return (sessionData.getRole() == role || sessionData.getRole() == BOSS)&& adminRepository.findByName(sessionData.getName()) != null;
+    }
 }

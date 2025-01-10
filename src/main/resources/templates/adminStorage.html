@@ -66,18 +66,15 @@
                                     <button th:formaction="@{/admin/storage.search}" class="button-action search-btn" type="submit">
                                         ПОИСК
                                     </button>
-                                    <button th:formaction="@{/admin/storage.add}" class="button-action add-btn" id="addButton" type="button" onclick="add()">
-                                        ДОБАВИТЬ/ПЕРЕЗАПИСАТЬ
+                                    <button th:formaction="@{/admin/storage.edit}" class="button-action add-btn" id="editButton" type="button" onclick="edit()">
+                                        ПЕРЕЗАПИСАТЬ
                                     </button>
                                 </th>
                             </form>
                         </tr>
-                        <tr th:each="data: ${foundData}">
-                            <td class="order-id" th:text="*{data.getName()}">ингредиент</td>
-                            <td class="order-name" th:text="*{data.getAmount()}">кол-во</td>
-                            <td class="text-view" >
-                                <button class="delete-btn button-action">Удалить</button>
-                            </td>
+                        <tr th:each="data: ${foundData}" th:id="*{data.getName()}">
+                            <td class="ingr-name" th:text="*{data.getName()}">ингредиент</td>
+                            <td class="ingr-amount" th:text="*{data.getAmount()}">кол-во</td>
                         </tr>
                         </tbody>
                     </table>

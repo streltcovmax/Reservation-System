@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.model.OrderData;
+import com.example.demo.model.menu.Dish;
 import com.example.demo.model.menu.Ingredient;
+import com.example.demo.repositories.DishRepository;
 import com.example.demo.repositories.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,7 @@ import java.util.Map;
 public class IngredientService {
 
     private final IngredientRepository ingredientRepository;
+    private final DishRepository dishRepository;
 
     public List<Ingredient> findIngredientByData(Ingredient searchData){
         List<List<Ingredient>> matchDataList = new ArrayList<>();
@@ -52,4 +55,28 @@ public class IngredientService {
 
         });
     }
+
+    //можно добавить обновление по конкретному игнред
+    public void updateAllDishesStatus(){
+        List<Dish> dishesList = dishRepository.findAll();
+        for (Dish dish: dishesList){
+            try {
+                dish.setAvailable(checkDishIngs(dish));
+                dishRepository.save(dish);
+            }catch (Exception e){
+                log.error("ERROR UPDATING DISHES STATUS " + dish.toString() + " EXC: " + e);
+            }
+        }
+    }
+
+    public boolean checkDishIngs(Dish dish){
+        Map<String, Integer> ingredientsAmounts = dish.getIngredientsAmounts();
+        for (Map.Entry<String, Integer> pair : ingredientsAmounts.entrySet()) {
+            Ingredient ingDB = ingredientRepository.findByName(pair.getKey());
+            if(ingDB == null || ingDB.getAmount() <= 0)
+                return false;
+        }
+        return true;
+    }
+
 }

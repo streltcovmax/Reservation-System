@@ -34,8 +34,8 @@
         Количество персон: значение
       </p>
 
-      <p class="result-row" th:text="'Сейчас заказывать: ' + (*{orderNow} ? 'да' : 'нет')">
-        Сейчас заказывать: значение
+      <p class="result-row" th:if="${basket}==null" th:text="'Заказать еду сейчас: ' + (*{orderNow} ? 'да' : 'нет')">
+        Заказать еду сейчас: значение
       </p>
 
       <p class="result-row" th:text="'Комментарий: ' + *{comment}">

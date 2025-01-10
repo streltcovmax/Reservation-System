@@ -36,15 +36,15 @@ public class AdminStorageController {
         return "adminStorage";
     }
 
-    @PostMapping("/admin/storage.add")
-    public ResponseEntity<String> addIngredient(@RequestBody Ingredient inputData, Model model){
+    @PostMapping("/admin/storage.edit")
+    public ResponseEntity<String> editIngredient(@RequestBody Ingredient inputData, Model model){
         try{
             ingredientRepository.save(inputData);
+            ingredientService.updateAllDishesStatus();
 
         }catch (Exception e){
             log.error("НЕ УДАЛОСЬ СОХРАНИТЬ ДАННЫЕ " + inputData);
         }
-
         return ResponseEntity.ok("Saved " + inputData);
     }
 }

@@ -26,15 +26,13 @@ public class MenuController {
 
     private final DishGroupRepository dishGroupRepository;
     private final DishRepository dishRepository;
-    private final BasketService basketService;
-    private final DishRepository dishService;
     private final IngredientService ingredientService;
 
     @GetMapping("/menu")
     public String showMenu(Model model, HttpSession session){
+        ingredientService.updateAllDishesStatus();
         List<DishGroup> dishGroups = dishGroupRepository.findAll();
         List<Dish> dishes = dishRepository.findAll();
-//        dishService.a
         model.addAttribute("dishGroups", dishGroups);
         model.addAttribute("dishes", dishes);
         Basket basket = (Basket) session.getAttribute("basket");
